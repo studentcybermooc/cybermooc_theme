@@ -3,7 +3,7 @@
 	<p>
 		<a href="/">Home</a>
 				{{ range sort .Site.Sections }}
-		· <a href="/{{ .Title | urlize }}">{{ .Title }}</a>
+		· <a href="{{ .RelPermalink }}">{{ .Title }}</a>
 				{{ end }}
 		· <a href="/index.xml">RSS</a>
 	</p>
