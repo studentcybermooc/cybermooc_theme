@@ -1,0 +1,26 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ .Site.Title }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>Recent content on {{ .Site.Title }}</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>{{ .Site.Title }}</managingEditor>
+    <copyright>MIT</copyright>
+    {{ with .OutputFormats.Get "RSS" }}
+        {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+    {{ end }}
+    {{ range (.Site.RegularPages.GroupByDate "2006") }}
+      {{ range (where .Pages "Type" "courses") }}
+      <item>
+        <title>{{ .Title }}</title>
+        <link>{{ .Permalink }}</link>
+        <pubDate>{{ .Date.Format "Mon, 02 Jan 2006" | safeHTML }}</pubDate>
+        <author>{{ .Site.Title }}</author>
+        <guid>{{ .Permalink }}</guid>
+        <description>{{ markdownify .Description }}</description>
+      </item>
+      {{ end }}
+    {{ end }}
+  </channel>
+</rss>
