@@ -1,0 +1,102 @@
+<div id="gh-comments">
+    <header class="text-center">
+        <h4>COMMENTS</h4>
+    </header>
+    <div id="gh-comments-list"></div>
+</div>
+
+<script type="text/javascript">
+
+function parse_links(headers_link){
+    var links = { };
+    for (var i in headers_link){
+        var entry = headers_link[i];
+        var link = { };
+        link.name = entry.match(/rel=\"([^\"]*)/)[1];
+        link.url = entry.match(/<([^>]*)/)[1];
+        link.page = entry.match(/page=(\d+).*$/)[1];
+        links[link.name] = link;
+    }
+    return links;
+}
+
+function create_comment_btn(issue_id) {
+    let page_comments = document.querySelectorAll('#gh-comments > header')[0];
+    const url_issues = "https://github.com/{{ .Site.Params.repoName }}/issues/"+issue_id;
+    var new_comment_btn = document.createElement('a');
+    new_comment_btn.setAttribute('href', url_issues + "#new_comment_field");
+    new_comment_btn.setAttribute('rel', 'nofollow');
+    new_comment_btn.setAttribute('target', '_new');
+    new_comment_btn.setAttribute('class', 'btngithub')
+    new_comment_btn.innerText = 'Post a comment on Github';
+    page_comments.appendChild(new_comment_btn);
+}
+
+function comments_closed() {
+    let comments_list = document.getElementById("gh-comments-list");
+    comments_list.innerHTML += "Comments are not open for this post yet.";
+}
+
+function create_comment_div(comment) {
+    const date_creation = new Date(comment.created_at);
+    const date_creation_string = date_creation.getUTCFullYear() +"/"+ (date_creation.getUTCMonth()+1) +"/"+ date_creation.getUTCDate() + " at " + date_creation.getUTCHours() + ":" + date_creation.getUTCMinutes();
+    let div_gh_comment = document.createElement('div');
+    div_gh_comment.setAttribute("class", "gh-comment");
+    let sub_div = document.createElement('div');
+    let img_avatar = document.createElement("img");
+    img_avatar.setAttribute("src", comment.user.avatar_url);
+    let link_profile = document.createElement('a');
+    link_profile.setAttribute("href", comment.user.html_url);
+    link_profile.innerText = comment.user.login;
+    let date_comment = document.createElement("em");
+    date_comment.innerText = date_creation_string;
+    sub_div.appendChild(img_avatar);
+    sub_div.appendChild(link_profile);
+    sub_div.innerHTML += " posted on ";
+    sub_div.appendChild(date_comment);
+    div_gh_comment.appendChild(sub_div);
+    div_gh_comment.innerHTML += comment['body'];
+    let comments_list = document.getElementById("gh-comments-list");
+    comments_list.appendChild(div_gh_comment);
+}
+
+function get_comments(issues_url, issue_id) {
+    let request = new XMLHttpRequest();
+    request.open('GET', issues_url);
+    request.onload = function() {
+        var data = JSON.parse(request.responseText);
+        if (data.message === 'Not Found') {
+            comments_closed();
+            return;
+        }
+        create_comment_btn(issue_id);
+        for (var index_comment in data) {
+            comment = data[index_comment];
+           create_comment_div(comment);
+        }
+        let more_comments = request.getResponseHeader("Link");
+        if (more_comments !== null) {
+            // TODO : it's a case where there's too much comments (idk how many but 100s does not trigger this so)
+            let links = parse_links(more_comments);
+        }
+    };
+    request.onerror = function() {
+        comments_closed();
+    };
+    request.send();
+}
+
+function load_comments(){
+    document.addEventListener('DOMContentLoaded', function(){
+        const issue_id = "{{ $.Params.githubIssueID }}"; 
+        const issues_url = "https://api.github.com/repos/{{ .Site.Params.githubRepo }}/issues/"+issue_id+"/comments";
+        if (issue_id !== undefined && issue_id > 0) {
+            get_comments(issues_url, issue_id);
+        } else {
+            comments_closed();
+        }
+    });
+}
+
+load_comments();
+</script>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ .Site.Title }}</title>
+    {{ partial "css" . }}
+  </head>
+  <body>
+    {{ partial "nav" . }}
+
+    <main class='home'>
+      <h1>{{ .Site.Title }}</h1>
+
+
+				<ul class="nested-list">
+				{{ range .Sections.Reverse }}
+					<li>{{ .Title }}
+						<ul>
+					{{ range .Sections.Reverse }}
+				   <li><a href="{{ .Scratch.Get "link" }}">{{ .Title }}</a></li>
+					{{ end }}
+				</ul></li>
+				{{ end }}
+			</ul>
+    </main>
+
+  </body>
+</html>

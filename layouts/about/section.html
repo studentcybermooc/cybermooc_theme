@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+  {{ partial "head" .}}
+
+  <body>
+    {{ partial "nav" . }}
+
+    <main>
+
+        <h1 class="text-center">{{ .Title }}</h1>
+
+        <div>{{ .Content }}</div>
+
+    </main>
+  </body>
+</html>

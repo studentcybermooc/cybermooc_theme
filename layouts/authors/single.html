@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+  {{ partial "head" .}}
+
+  <body>
+    {{ partial "nav" . }}
+
+    <main>
+
+        <h1 class="text-center">{{ .Title }}</h1>
+
+        {{ with .Params.social_links }}
+        <h4 class="text-center">
+            {{/* TODO: last element dict iterating */}}
+            {{ range $key, $value := . }}
+                <a href="{{ $value }}" target="_new" rel="nofollow">{{ $key }}</a> ·
+            {{ end }}
+        </h4>
+        {{ end }}
+
+        <hr>
+
+        <div>{{ .Content }}</div>
+
+    </main>
+  </body>
+</html>

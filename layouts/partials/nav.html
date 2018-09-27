@@ -1,0 +1,11 @@
+<div id="top"></div>
+<nav>
+	<p>
+		<a href="/">Home</a>
+				{{ range sort .Site.Sections }}
+		· <a href="/{{ .Title | urlize }}">{{ .Title }}</a>
+				{{ end }}
+	</p>
+</nav>
+
+<img id="up" src="/img/to_the_top.png" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'});">

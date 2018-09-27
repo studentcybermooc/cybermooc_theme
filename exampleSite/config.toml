@@ -1,0 +1,7 @@
+baseURL = "https://example.com/"
+title = "Example MOOC"
+theme = "cybermooc_theme"
+
+[params]
+    description = "ENSIBS Student Cyber MOOC"
+    githubRepo = "$user/$repo"
