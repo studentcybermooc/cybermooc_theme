@@ -8,7 +8,7 @@ button,hr,input{overflow:visible}progress,sub,sup{vertical-align:baseline}[type=
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: normal;
-  src: local("Open Sans"), url(/fonts/OpenSans-Regular.ttf) format("woff")
+  src: local("Open Sans"), url(/assets/fonts/OpenSans-Regular.ttf) format("woff")
 }
 
 :root {
