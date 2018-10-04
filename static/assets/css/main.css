@@ -90,6 +90,10 @@ main {
   text-align: center;
 }
 
+a.important-links {
+  color: var(--grey)
+}
+
 main > ul.courses_categories {
   list-style: none;
   padding: 0;

@@ -11,11 +11,13 @@
           <header>
               <h1>{{ .Title }}</h1>
               <p class="post_date">{{ .Date.Format "2 Jan 2006" }} · {{ .ReadingTime }} min read</p>
+              {{ with .Params.tags }}
               <p class="post_tags">
-                {{ range $i, $e := .Params.tags }}
+                {{ range $i, $e := . }}
                   {{ if $i }}· {{ end }}<a href="/tags/{{ . | urlize }}">{{ . }}</a>
                 {{ end }}
               </p>
+              {{ end }}
               <section class="post_toc">
                 <input id="toc-toggle" type="checkbox">
                 <label for="toc-toggle" id="toggle">
