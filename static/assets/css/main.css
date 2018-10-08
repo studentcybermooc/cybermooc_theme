@@ -157,6 +157,16 @@ main.post > article > header > p.post_tags > a {
   text-decoration: none;
 }
 
+main.post > article > header > p.post_authors {
+  font-weight: bold;
+}
+
+main.post > article > header > p.post_authors > a {
+  line-height: 1.8;
+  color: var(--light-grey);
+  text-decoration: none;
+}
+
 main.post > article > header > section.post_toc > label > p.toc-title {
   font-weight: bold;
   color: var(--grey);

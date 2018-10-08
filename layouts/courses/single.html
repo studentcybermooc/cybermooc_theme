@@ -18,6 +18,14 @@
                 {{ end }}
               </p>
               {{ end }}
+              {{ with .Params.authors }}
+              <p class="post_authors">by 
+                {{/* TODO first item to show dot, like the tags */}}
+                {{ range $author, $link := . }}
+                  <a href="{{ $link }}" target="_new" rel="nofollow">{{ $author }}</a> ·
+                {{ end }}
+              </p>
+              {{ end }}
               <section class="post_toc">
                 <input id="toc-toggle" type="checkbox">
                 <label for="toc-toggle" id="toggle">

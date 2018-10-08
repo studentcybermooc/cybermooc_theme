@@ -2,6 +2,9 @@
 title: ""
 draft: true
 date: {{ dateFormat "2006-01-02" .Date }}
+authors: {
+    author_1: "/authors/author_1/"
+}
 social_links: {
 	twitter: "https://twitter.com/CHANGE_ME",
 	facebook: "https://www.facebook.com/CHANGE_ME/",
