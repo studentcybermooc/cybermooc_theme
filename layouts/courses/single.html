@@ -14,12 +14,12 @@
               {{ with .Params.tags }}
               <p class="post_tags">
                 {{ range $i, $e := . }}
-                  {{ if $i }}· {{ end }}<a href="/tags/{{ . | urlize }}">{{ . }}</a>
+                  {{ if $i }}· {{ end }}<a href="tags/{{ . | urlize }}">{{ . }}</a>
                 {{ end }}
               </p>
               {{ end }}
               {{ with .Params.authors }}
-              <p class="post_authors">by 
+              <p class="post_authors">by
                 {{/* TODO first item to show dot, like the tags */}}
                 {{ range $author, $link := . }}
                   <a href="{{ $link }}" target="_new" rel="nofollow">{{ $author }}</a> ·
@@ -39,7 +39,7 @@
           <hr>
         </article>
     </main>
-    
+
     {{ partial "comments" . }}
 
   <script>
@@ -57,10 +57,10 @@
     })();
   </script>
     <!-- <link rel="stylesheet" href="/highlight/styles/github.css"> -->
-  <link rel="stylesheet" href="/assets/highlight/styles/hopscotch.css">
+  <link rel="stylesheet" href="{{ "assets/highlight/styles/hopscotch.css" | relURL }}">
   <!-- <link rel="stylesheet" href="/highlight/styles/routeros.css"> -->
 
-  <script src="/assets/highlight/highlight.pack.js"></script>
+  <script src="{{ "assets/highlight/highlight.pack.js" | relURL }}"></script>
   <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>

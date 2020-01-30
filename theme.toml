@@ -2,11 +2,11 @@ name = "cybermooc_theme"
 license = "MIT"
 licenselink = "https://github.com/studentcybermooc/cybermooc_theme/blob/master/LICENSE.md"
 description = "a theme crafted for our needs"
-homepage = "https://studentcybermooc.com"
+homepage = "https://studentcybermooc.github.io/cybermooc/"
 tags = ["minimal", "no_frameworks"]
 features = ["github_comments"]
 min_version = "0.38"
 
 [author]
-  name = "ensibs student cyber mooc"
-  homepage = "https://studentcybermooc.com"
+  name = "ENSIBS student cyber mooc"
+  homepage = "https://studentcybermooc.github.io/cybermooc/"

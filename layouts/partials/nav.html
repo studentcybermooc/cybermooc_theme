@@ -5,8 +5,8 @@
 				{{ range sort .Site.Sections }}
 		· <a href="{{ .RelPermalink }}">{{ .Title }}</a>
 				{{ end }}
-		· <a href="/index.xml">RSS</a>
+		· <a href="{{ "index.xml" | relURL }}">RSS</a>
 	</p>
 </nav>
 
-<img id="up" src="/img/to_the_top.png" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'});">
+<img id="up" src="{{ "img/to_the_top.png" | relURL }}" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'});">
